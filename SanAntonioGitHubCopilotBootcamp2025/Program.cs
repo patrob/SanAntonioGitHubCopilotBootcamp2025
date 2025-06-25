@@ -33,6 +33,30 @@ app.MapGet("/weatherforecast", () =>
     })
     .WithName("GetWeatherForecast");
 
+// Create a new GET endpoint that returns a weather forecast for a specific city
+app.MapGet("/weatherforecast/{city}", (string city) =>
+    {
+        var forecast = Enumerable.Range(1, 5).Select(index =>
+                new WeatherForecast
+                (
+                    DateOnly.FromDateTime(DateTime.UtcNow.AddDays(index)),
+                    Random.Shared.Next(-20, 55),
+                    summaries[Random.Shared.Next(summaries.Length)]
+                ))
+            .ToArray();
+        return Results.Ok(new { City = city, Forecast = forecast });
+    })
+    .WithName("GetWeatherForecastByCity");
+
+// Add a new GET endpoint '/willitrain' that returns a random boolean indicating if it will rain
+app.MapGet("/willitrain", () =>
+{
+    // Randomly decide if it will rain
+    bool willRain = Random.Shared.Next(2) == 0;
+    return Results.Ok(new { WillItRain = willRain });
+})
+.WithName("WillItRain");
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
