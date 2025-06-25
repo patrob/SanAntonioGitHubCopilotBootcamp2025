@@ -19,7 +19,8 @@
     "vscode": {
       "extensions": [
         "GitHub.copilot",
-        "ms-dotnettools.csdevkit"
+        "ms-dotnettools.csdevkit",
+        "bierner.markdown-mermaid"
       ],
       "settings": {
           "chat.agent.enabled": true,
