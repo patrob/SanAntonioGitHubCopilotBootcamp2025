@@ -19,13 +19,17 @@ UrlListApp is a simple ASP.NET Core web application designed to manage and displ
 
 ```mermaid
 flowchart TD
-    A[User visits site] --> B[Request handled by ASP.NET Core]
-    B --> C[Program.cs configures app]
-    C --> D[Routes to Razor Page (Index.cshtml)]
-    D --> E[Index.cshtml.cs loads URL list]
-    E --> F[Page rendered with URLs]
-    F --> G[User interacts with page]
-    G -->|Optional| D
+    A[User requests page or asset]
+    A --> B[ASP.NET Core Middleware Pipeline]
+    B --> C{Static file?}
+    C -->|Yes| D[Serve from wwwroot]
+    C -->|No| E{Razor Page?}
+    E -->|Yes| F[Routing to Razor Page]
+    F --> G[PageModel loads data]
+    G --> H[Razor Page rendered]
+    H --> I[Response sent to user]
+    E -->|No| J[Error Handling]
+    J --> K[Error Page Rendered]
 ```
 
 ## Getting Started
