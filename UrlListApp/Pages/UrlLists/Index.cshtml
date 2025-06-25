@@ -1,0 +1,42 @@
+@page
+@model UrlListApp.Pages.UrlLists.IndexModel
+@{
+    ViewData["Title"] = "Your URL Lists";
+}
+
+<h1>Your URL Lists</h1>
+<p>
+    <a asp-page="Create" class="btn btn-primary">Create New List</a>
+</p>
+@if (Model.UrlLists.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Custom URL</th>
+                <th>Published</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var list in Model.UrlLists)
+        {
+            <tr>
+                <td>@list.Title</td>
+                <td>@list.CustomUrl</td>
+                <td>@list.Published</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@list.Id">Edit</a> |
+                    <a asp-page="Details" asp-route-id="@list.Id">View</a> |
+                    <a asp-page="Delete" asp-route-id="@list.Id">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No lists found. Create one!</p>
+}

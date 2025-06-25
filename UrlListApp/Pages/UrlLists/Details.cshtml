@@ -1,0 +1,32 @@
+@page "{id:guid}"
+@model UrlListApp.Pages.UrlLists.DetailsModel
+@{
+    ViewData["Title"] = "URL List Details";
+}
+
+<h1>@Model.UrlList?.Title</h1>
+<p><strong>Custom URL:</strong> @Model.UrlList?.CustomUrl</p>
+<p><strong>Published:</strong> @Model.UrlList?.Published</p>
+
+<h2>URLs</h2>
+@if (Model.UrlList?.Items?.Any() == true)
+{
+    <ul>
+    @foreach (var item in Model.UrlList.Items)
+    {
+        <li>
+            <a href="@item.Url" target="_blank">@item.Url</a>
+            @if (!string.IsNullOrEmpty(item.Title)) { <span> - @item.Title</span> }
+            @if (!string.IsNullOrEmpty(item.Description)) { <span> - @item.Description</span> }
+        </li>
+    }
+    </ul>
+}
+else
+{
+    <p>No URLs in this list yet.</p>
+}
+<p>
+    <a asp-page="Edit" asp-route-id="@Model.UrlList?.Id">Edit List</a> |
+    <a asp-page="Index">Back to Lists</a>
+</p>

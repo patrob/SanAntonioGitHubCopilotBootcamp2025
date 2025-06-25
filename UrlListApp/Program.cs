@@ -2,6 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -20,7 +21,10 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
-app.MapRazorPages()
-    .WithStaticAssets();
+app.MapRazorPages();
+app.MapControllerRoute(
+    name: "urllists",
+    pattern: "lists/{customUrl}",
+    defaults: new { controller = "UrlLists", action = "Details" });
 
 app.Run();

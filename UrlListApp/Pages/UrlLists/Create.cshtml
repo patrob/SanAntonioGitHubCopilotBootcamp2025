@@ -1,0 +1,22 @@
+@page
+@model UrlListApp.Pages.UrlLists.CreateModel
+@{
+    ViewData["Title"] = "Create New URL List";
+}
+
+<h1>Create New URL List</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="UrlList.Title" class="form-label"></label>
+        <input asp-for="UrlList.Title" class="form-control" />
+        <span asp-validation-for="UrlList.Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="UrlList.CustomUrl" class="form-label">Custom URL (optional)</label>
+        <input asp-for="UrlList.CustomUrl" class="form-control" />
+        <span asp-validation-for="UrlList.CustomUrl" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

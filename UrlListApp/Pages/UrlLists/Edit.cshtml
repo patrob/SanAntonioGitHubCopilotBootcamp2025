@@ -1,0 +1,22 @@
+@page "Edit/{id:guid}"
+@model UrlListApp.Pages.UrlLists.EditModel
+@{
+    ViewData["Title"] = "Edit URL List";
+}
+
+<h1>Edit URL List</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="UrlList.Title" class="form-label"></label>
+        <input asp-for="UrlList.Title" class="form-control" />
+        <span asp-validation-for="UrlList.Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="UrlList.CustomUrl" class="form-label">Custom URL</label>
+        <input asp-for="UrlList.CustomUrl" class="form-control" />
+        <span asp-validation-for="UrlList.CustomUrl" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>
